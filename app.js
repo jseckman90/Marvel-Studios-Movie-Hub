@@ -1,3 +1,5 @@
+
+
 const ironMan = '1726'
 const hulk = '1724'
 const ironMan2 = '10138'
@@ -24,26 +26,54 @@ const captainMarvel = '299537'
 const avengersEndgame = '299534'
 const spiderManFarFromHome = '429617'
 
+let posterArray = [ironMan, hulk, ironMan2, thor, capAmerica, avengers, ironMan3, thorDarkWorld,capAmericaWS, guardians, avengersUltron, antMan,capAmericaCW, doctorStrange,guardians2, spiderManHomecoming, thorRag, blackPanther, avengersInfinity, antManWasp,captainMarvel, avengersEndgame, spiderManFarFromHome]
 
-        $.ajax({
-            url: `https://api.themoviedb.org/3/movie/${guardians2}?api_key=c153d46ebc986f5c9274a30a6c3111e8&language=en-US`,
-          }).then((data) => {
-            console.log(data);
-            $('#info').append($('<div>').text(data.title))
-            
-            
-          
-        });
+for (i = 0; i < posterArray.length; i++) {
+  let movie = posterArray[i]
+$.ajax({
+  
 
-        $.ajax({
-            url: `https://api.themoviedb.org/3/movie/${guardians}/images?api_key=c153d46ebc986f5c9274a30a6c3111e8&language=en-US`,
-          }).then((data) => {
-            console.log(data);
-            $('#info').append(`<img src="${data.posters}">`)
-            
-            
-          
-        });
+  url: `https://api.themoviedb.org/3/movie/${movie}?api_key=c153d46ebc986f5c9274a30a6c3111e8&language=en-US`,
+  }).then((data) => {
+    console.log(data);
+    // $('#info').append($('<div>').text(data.title))
+
+
+    $.ajax({
+
+      url: `http://www.omdbapi.com/?apikey=aa940672&t=${data.title}`,
+      }).then((data) => {
+          console.log(data);
     
+          
+          $('#poster-carousel').append(`<img class="poster" src="${data.Poster}">`)
+    
+          $('.poster').on('click', (event) => {
+            event.preventDefault();
+          
+            $.ajax({
+              url: `https://api.themoviedb.org/3/movie/${movie}/credits?api_key=c153d46ebc986f5c9274a30a6c3111e8`,
+              }).then((data) => {
+                console.log(data.cast);
+            
+                for (i = 0; i< data.cast.length; i++) {
+                  $('#info').append($('<div class = "character">').text(data.cast[i].character))
+                }
+            
+            });
+            
+            
+          })
+          
+                
+    });
+            
+});
+}           
+          
+
+
+
+          
 
 
