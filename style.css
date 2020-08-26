@@ -1,0 +1,19 @@
+/* .poster-carousel {
+   
+    display: flex;
+    justify-content: space-around;
+  } */
+
+.poster {
+   height: 100px;
+   
+}
+
+/* .carousel-images img {
+    
+    display: none;
+  }
+
+.carousel-images img:first-of-type {
+    display: block;
+  } */
