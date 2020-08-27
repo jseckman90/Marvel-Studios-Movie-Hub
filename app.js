@@ -1,17 +1,18 @@
+//PHASE 1
 const ironMan = '1726'
 const hulk = '1724'
 const ironMan2 = '10138'
 const thor = '10195'
 const capAmerica = '1771'
 const avengers = '24428'
-
+//PHASE 2
 const ironMan3 = '68721'
 const thorDarkWorld = '76338'
 const capAmericaWS = '100402'
 const guardians = '118340'
 const avengersUltron = '99861'
 const antMan = '102899'
-
+//PHASE 3
 const capAmericaCW = '271110'
 const doctorStrange = '284052'
 const guardians2 = '283995'
@@ -37,7 +38,7 @@ $.ajax({
   url: `https://api.themoviedb.org/3/movie/${movie}?api_key=c153d46ebc986f5c9274a30a6c3111e8&language=en-US`,
   }).then((data) => {
     // console.log(data);
-    $('#movie-info').append($(`<div id = ${movie}-info>`).append(`<h1 class = "title">${data.title}</h1>`).css('display','none'))
+    $('#movie-info').append($(`<div id = ${movie}-info class="movie-info">`).append(`<h1 class = "title">${data.title}</h1>`).css('display','none'))
     $(`#${movie}-info`).append(`<h2 class = "year">Released: ${data.release_date}</h2>`)
     $(`#${movie}-info`).append(`<h3 class = "plot">${data.overview}</h3>`)
     $(`#${movie}-info`).append('<ul class="characters">')
@@ -105,6 +106,7 @@ $(".next").on("click", () => {
     posterIndex = 0;
   }
   $(".carousel-images").children().eq(posterIndex).css("display", "block");
+  $(`.movie-info`).css('display', 'none')
 });
           
 $(".previous").on("click", () => {
