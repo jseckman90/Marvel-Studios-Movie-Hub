@@ -122,8 +122,6 @@ let movieArray = [ironMan, hulk, ironMan2, thor, capAmerica, avengers, ironMan3,
 
 
 let highestIndex = 0
-let highestTitleIndex = $("#phase-title").children().length - 1;
-
 
 
 
@@ -131,7 +129,7 @@ for (i = 0; i < movieArray.length; i++) {
   let movie = movieArray[i]
  console.log(movie.id)
   if (movie.phase === '1') {
-  $('#phase-1').append(`<img id = "${movie.id}" class="poster" src="${movie.poster}">`)
+    $('#phase-1').append(`<img id = "${movie.id}" class="poster" src="${movie.poster}">`)
   }
 
   if (movie.phase === '2') {
@@ -169,10 +167,7 @@ $.ajax({
           }
         });
     
-    //////////////////////////////////////////////////////
-    // Append posters to caorusel-images in the poster-carousel div
-    //////////////////////////////////////////////////////
-   
+  
   
           
           ///////////////////////////////////
@@ -180,13 +175,13 @@ $.ajax({
           ///////////////////////////////////
 
           
-          $(`#${movie.id}`).on('click', (event) => {
-            event.preventDefault();
-            console.log(event.currentTarget)
-             $(`#${event.currentTarget.id}-info`).toggle()
-          })
+    $(`#${movie.id}`).on('click', (event) => {
+      event.preventDefault();
+      console.log(event.currentTarget)
+      $(`#${event.currentTarget.id}-info`).toggle()
+      })
 
-          highestIndex = $("#carousel-images").children().length - 1;
+      highestIndex = $("#carousel-images").children().length - 1;
 
           
  
@@ -197,6 +192,8 @@ $.ajax({
           
 let posterIndex = 0
 let titleIndex = 0
+let highestTitleIndex = $("#phase-title").children().length - 1;
+
 
 
 $(".next").on("click", () => {
