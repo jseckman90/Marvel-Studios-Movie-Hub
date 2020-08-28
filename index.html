@@ -12,17 +12,27 @@
     <script src="app.js" defer></script>
 </head>
 <body>
-    <header><h1>MCU Movie HUB</h1></header>
+    <header>
+        <img id="logo" src="marvel_studios.png" >
+        <h1>M O V I E &nbsp;&nbsp;H U B</h1>
+    </header>
     
-
     
-
+    <div id = phase-title>
+        <h2 id="phase-1-title">- P H A S E &nbsp;&nbsp; 1 -</h2>
+        <h2 id="phase-2-title">- P H A S E &nbsp;&nbsp; 2 -</h2>
+        <h2 id="phase-3-title">- P H A S E &nbsp;&nbsp; 3 -</h2>
+    </div>
     <div class="poster-carousel">
         <div class="previous">
             <span><ion-icon name="caret-back-outline"></ion-icon></ion-icon></span>
         </div>
          
-        <div class="carousel-images"></div>
+        <div class="carousel-images">
+            <div id="phase-1" class="phase"></div>
+            <div id="phase-2" class="phase"></div>
+            <div id="phase-3" class="phase"></div>
+        </div>
         
         <div class="next">
             <span><ion-icon name="caret-forward-outline"></ion-icon></ion-icon></span>
@@ -36,6 +46,7 @@
     <div id="movie-info">
        
     </div>
+
        
           
 <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>    

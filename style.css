@@ -1,50 +1,93 @@
+body {
+  /* background-image: linear-gradient(rgb(33,33,33), black) */
+  background-color: rgb(33,33,33);
 
+}
 header {
   display: flex;
-  font-family: 'Bebas Neue', cursive;
-  justify-content: center;
+  height: 20%;
+  font-family: 'Tungsten', cursive;
+  flex-direction: column;
+  align-items: center;
   font-size: 1.25em;
+  color: lightgray;
+  /* color: rgb(244, 34, 40); */
+  /* border: 2px solid black */
+  border-bottom: 1px solid lightgray;
+  
+}
+
+
+#logo {
+  width: 400px;
+  margin-bottom: -20px;
+}
+
+#phase-title {
+  display:flex;
+  justify-content: center;
+  font-family: 'Tungsten', 'Bebas Neue';
+  color:lightgray;
+}
+#phase-1-title, #phase-2-title, #phase-3-title {
+  display: none;
+}
+
+#phase-title h2:first-of-type {
+  display: block;
 }
 
 .poster-carousel {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   width: 95%;
+  height: 200px;
   margin: auto;
-  border: 2px solid black;
+  /* border: 2px solid white; */
   /* background-color: darkslategrey; */
 }
 
 .carousel-images {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 95%;
+  height: 95%;
   justify-content: space-evenly;
+  /* border: 1px solid white; */
+  
   /* background-color: darkslategrey */
 
 }
 
+.carousel-images div:first-of-type {
+  display: block;
+} 
+
+
+.phase {
+  display: none;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+
+}
+
+
 .poster {
-   height: 200px;
-   cursor: pointer;
-   margin: 2px;
-   transition: transform .2s;
-   box-shadow: 10px 10px  10px lightgray;
-   
-   
+  height: 175px;
+  cursor: pointer;
+  margin: 2px;
+  transition: transform .2s; 
+  
 }
 
 .poster:hover {
   transform: scale(1.5); 
+  box-shadow: 5px 5px  5px rgb(244, 34, 40);
 }
 
-.carousel-images img {
-    display: none;
-}
-
-.carousel-images img:first-of-type {
-    display: block;
-} 
 
 #movie-info {
   display: flex;
@@ -52,7 +95,7 @@ header {
   margin: auto;
   font-family: 'Bebas Neue', cursive;
   color: white;
-  background-color: darkslategrey;
+  background-color: rgb(33,33,33);
 }
 
 #movie-info h1, h3, h2 {
@@ -72,8 +115,9 @@ header {
 .next, .previous {
   cursor: pointer;
   transition: transform .2s;
-  opacity: 25%;
   font-size: 2em;
+  color: rgb(244, 34, 40);
+  opacity: 50%
 
 }
 
