@@ -186,7 +186,7 @@ $.ajax({
              $(`#${event.currentTarget.id}-info`).toggle()
           })
 
-          highestIndex = $(".carousel-images").children().length - 1;
+          highestIndex = $("#carousel-images").children().length - 1;
 
           
  
@@ -203,14 +203,14 @@ $(".next").on("click", () => {
             
   console.log("Next was clicked") ;
   
-  $(".carousel-images").children().eq(posterIndex).css("display", "none");
+  $("#carousel-images").children().eq(posterIndex).css("display", "none");
   
   if (posterIndex < highestIndex) {
     posterIndex++;
   } else {
     posterIndex = 0;
   }
-  $(".carousel-images").children().eq(posterIndex).css("display", "flex");
+  $("#carousel-images").children().eq(posterIndex).css("display", "flex");
 
 
   $('#phase-title').children(titleIndex).css('display', "none")
@@ -226,7 +226,7 @@ $(".next").on("click", () => {
 $(".previous").on("click", () => {
             
   console.log("Previous was clicked");
-  $(".carousel-images").children().eq(posterIndex).css("display", "none");
+  $("#carousel-images").children().eq(posterIndex).css("display", "none");
   
   if (posterIndex > 0) {
     posterIndex--;
@@ -243,7 +243,7 @@ $(".previous").on("click", () => {
   $("#phase-title").children().eq(titleIndex).css("display", "block");
   $(`.movie-info`).css('display', 'none')
   
-  $(".carousel-images").children().eq(posterIndex).css("display", "flex");
+  $("#carousel-images").children().eq(posterIndex).css("display", "flex");
   $("#phase-title").children().eq(titleIndex).css("display", "block");
 });       
               
