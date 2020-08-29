@@ -120,14 +120,15 @@ const spiderManFarFromHome = {
 let movieArray = [ironMan, hulk, ironMan2, thor, capAmerica, avengers, ironMan3, thorDarkWorld,capAmericaWS, guardians, avengersUltron, antMan,capAmericaCW, doctorStrange,guardians2, spiderManHomecoming, thorRag, blackPanther, avengersInfinity, antManWasp,captainMarvel, avengersEndgame, spiderManFarFromHome]
 
 
-
 let highestIndex = 0
-
-
 
 for (i = 0; i < movieArray.length; i++) {
   let movie = movieArray[i]
- console.log(movie.id)
+  // console.log(movie.id)
+
+  /////////////////////////////
+  //Append movie posters to poster-carousel>carousel-images div
+  /////////////////////////////
   if (movie.phase === '1') {
     $('#phase-1').append(`<img id = "${movie.id}" class="poster" src="${movie.poster}">`)
   }
@@ -141,52 +142,60 @@ for (i = 0; i < movieArray.length; i++) {
   }
 
 
-
   //////////////////////////////////
   // Append movie info to movie-info div
   ///////////////////////////////////
-$.ajax({
-  url: `https://api.themoviedb.org/3/movie/${movie.id}?api_key=c153d46ebc986f5c9274a30a6c3111e8&language=en-US`,
-  }).then((data) => {
-    // console.log(data);
-    $('#movie-info').append($(`<div id = ${movie.id}-info class="movie-info">`).append(`<h1 class = "title">${data.title}</h1>`).css('display','none'))
-    $(`#${movie.id}-info`).append(`<h2 class = "year">Released: ${data.release_date}</h2>`)
-    $(`#${movie.id}-info`).append(`<h3 class = "plot">${data.overview}</h3>`)
-    $(`#${movie.id}-info`).append('<ul class="characters">')
-
-    ///////////////////////////
-    // Append cast to movie-info div
-    ///////////////////////////
-    $.ajax({
-      url: `https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=c153d46ebc986f5c9274a30a6c3111e8`,
-      }).then((data) => {
-          // console.log(data.cast);
-          for(i = 0; i<data.cast.length; i++) {
-            $(`#${movie.id}-info`).children('.characters').append(`<li>${data.cast[i].character}</li>`)
-         
-          }
-        });
-    
-  
-  
-          
-          ///////////////////////////////////
-          //CLICK ON POSTER TO GET MOVIE DETAILS/CAST
-          ///////////////////////////////////
-
-          
-    $(`#${movie.id}`).on('click', (event) => {
-      event.preventDefault();
-      console.log(event.currentTarget)
-      $(`#${event.currentTarget.id}-info`).toggle()
-      })
-
-      highestIndex = $("#carousel-images").children().length - 1;
-
-          
- 
+  $.ajax({
+    url: `https://api.themoviedb.org/3/movie/${movie.id}?api_key=c153d46ebc986f5c9274a30a6c3111e8&language=en-US`,
+    }).then((data) => {
+      // console.log(data);
+      $('#movie-info').append(`<div id = "${movie.id}-info" class="movie-info">`);
+      $(`#${movie.id}-info`).append(`<div id = "${movie.id}-close" class = "close-info">CLOSE</div>`);
+      $(`#${movie.id}-info`).append(`<h1 class = "title">${data.title}</h1>`).css('display','none');
+      $(`#${movie.id}-info`).append(`<h2 class = "year">Released: ${data.release_date}</h2>`);
+      $(`#${movie.id}-info`).append(`<h3 class = "plot">${data.overview}</h3>`);
+      // $(`#${movie.id}-info`).append(`<h4 class = "title">Characters:</h3>`);
+      $(`#${movie.id}-info`).append('<ul class="characters"><h4>Characters:</h4><ul>');
+      
+      $(`#${movie.id}-close`).on('click', (event) => {
+        event.preventDefault();
+        console.log('close clicked')
+        $(`#${movie.id}-close`).parent().css('display', 'none')
         
-  });
+        })
+    });
+
+  ///////////////////////////
+  // Append cast to movie-info div
+  ///////////////////////////
+  $.ajax({
+    url: `https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=c153d46ebc986f5c9274a30a6c3111e8`,
+    }).then((data) => {
+      //loop through data.cast to pull the first 25 characters of each movie
+      // console.log(data.cast);
+      for(i = 0; i < 25; i++) {
+        $(`#${movie.id}-info`).children('.characters').append(`<li>${data.cast[i].character}</li>`)
+         
+      }
+    });
+      
+  ///////////////////////////////////
+  //CLICK ON POSTER TO GET MOVIE DETAILS/CAST
+  ///////////////////////////////////        
+  $(`#${movie.id}`).on('click', (event) => {
+    event.preventDefault();
+    // console.log(event.currentTarget)
+    $(`#${event.currentTarget.id}-info`).toggle()
+    $(`#${event.currentTarget.id}-info`)[0].scrollIntoView({behavior: 'smooth', block: 'start', inline:'nearest'})
+    })
+    
+  ///////////////////////////////////
+  //CLOCK CLOSE WITHING MOVIE INFO TO CHANGE PARENT DIV TO DISPLAY:NONE
+  ///////////////////////////////////
+  
+
+  highestIndex = $("#carousel-images").children().length - 1;
+
 }      
        
           
@@ -198,7 +207,7 @@ let highestTitleIndex = $("#phase-title").children().length - 1;
 
 $(".next").on("click", () => {
             
-  console.log("Next was clicked") ;
+  // console.log("Next was clicked") ;
   
   $("#carousel-images").children().eq(posterIndex).css("display", "none");
   
@@ -207,22 +216,25 @@ $(".next").on("click", () => {
   } else {
     posterIndex = 0;
   }
+
   $("#carousel-images").children().eq(posterIndex).css("display", "flex");
-
-
   $('#phase-title').children(titleIndex).css('display', "none")
+
   if (titleIndex < highestTitleIndex) {
     titleIndex++;
   } else {
     titleIndex = 0;
   }
+
   $("#phase-title").children().eq(titleIndex).css("display", "block");
   $(`.movie-info`).css('display', 'none')
 });
+
+
           
 $(".previous").on("click", () => {
             
-  console.log("Previous was clicked");
+  // console.log("Previous was clicked");
   $("#carousel-images").children().eq(posterIndex).css("display", "none");
   
   if (posterIndex > 0) {
@@ -230,19 +242,21 @@ $(".previous").on("click", () => {
   } else {
     posterIndex = highestIndex;
   }
-
   $('#phase-title').children(titleIndex).css('display', "none")
+
   if (titleIndex < highestTitleIndex) {
     titleIndex--;
   } else {
     titleIndex = highestTitleIndex;
   }
+
   $("#phase-title").children().eq(titleIndex).css("display", "block");
   $(`.movie-info`).css('display', 'none')
-  
   $("#carousel-images").children().eq(posterIndex).css("display", "flex");
-  $("#phase-title").children().eq(titleIndex).css("display", "block");
-});       
-              
-                    
+  
+});
+
+
+
+
 
