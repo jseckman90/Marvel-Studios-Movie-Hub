@@ -253,7 +253,7 @@ $(".previous").on("click", () => {
   $("#phase-title").children().eq(titleIndex).css("display", "block");
   $(`.movie-info`).css('display', 'none')
   $("#carousel-images").children().eq(posterIndex).css("display", "flex");
-  
+ 
 });
 
 
