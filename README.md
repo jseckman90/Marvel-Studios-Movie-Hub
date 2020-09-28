@@ -1,4 +1,4 @@
-# project-1
+# Marvel Studios Movie Hub
 
 # URL: 
 https://marvelstudiosmoviehub-orcin.vercel.app/
